@@ -1,7 +1,8 @@
 import React from 'react';
+import MachineBx from './components/layout/MachineBx';
 
 function App() {
-    return <h1>hi sads asdsadasd</h1>;
+    return <MachineBx />;
 }
 
 export default App;
