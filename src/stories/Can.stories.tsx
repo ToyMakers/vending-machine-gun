@@ -1,19 +1,27 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 import Can, { propsType } from '../components/common/Can';
+import sodaData, { sodaType } from '../asset/brand';
+import { stringify } from 'querystring';
 
 export default {
     title: 'Can',
     component: Can,
     argTypes: {
-        product: { control: 'text' },
+        sodaColor: {
+            control: {
+                type: 'select',
+                options: [...sodaData.map((val) => val.color)],
+            },
+        },
+        sodaName: {
+            control: {
+                type: 'text',
+            },
+        },
     },
 };
 
-const Template: Story<propsType> = (args: propsType) => <Can {...args} />;
-
-export const Primary = Template.bind({});
-Primary.args = {
-    color: ['#000'],
-    product: 'Demi\nSoda',
-};
+export const CanTemplate = ({ sodaColor, sodaName }: never) => (
+    <Can color={sodaColor} product={sodaName} />
+);

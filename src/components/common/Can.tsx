@@ -34,13 +34,12 @@ const DrinkLabel = styled.span`
 `;
 
 export interface propsType {
-    product: string;
-    price: number;
+    product?: string;
     color: string[];
 }
 
-function Can({ product, price, color }: propsType) {
-    console.log(product, price, color);
+function Can({ product = 'sider', color = ['#000', '#000', '#000', '#000'] }: propsType) {
+    console.log(product, color);
     return (
         <NoNameCan
             basicColor={color[0]}
