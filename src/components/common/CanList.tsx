@@ -6,6 +6,7 @@ import sodaData, { sodaType } from '../../asset/brand';
 const SodaList = styled.ul`
     display: flex;
     padding-top: 20px;
+    background-color: #165022;
 `;
 
 const SodaItem = styled.li`
@@ -24,18 +25,18 @@ function CanList({ soda }: sodaListType) {
         <SodaList>
             {soda === 1
                 ? firstLine.map((val) => {
-                      const { id, product, price } = val;
+                      const { id, product, price, color } = val;
                       return (
                           <SodaItem key={id}>
-                              <Can product={product} price={price} />
+                              <Can product={product} price={price} color={color} />
                           </SodaItem>
                       );
                   })
                 : secondLine.map((val) => {
-                      const { id, product, price } = val;
+                      const { id, product, price, color } = val;
                       return (
                           <SodaItem key={id}>
-                              <Can product={product} price={price} />
+                              <Can product={product} price={price} color={color} />
                           </SodaItem>
                       );
                   })}
