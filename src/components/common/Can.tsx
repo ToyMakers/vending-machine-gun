@@ -38,7 +38,7 @@ export interface propsType {
     color: string[];
 }
 
-function Can({ product = 'sider', color = ['#000', '#000', '#000', '#000'] }: propsType) {
+function Can({ product, color }: propsType) {
     console.log(product, color);
     return (
         <NoNameCan
@@ -53,3 +53,8 @@ function Can({ product = 'sider', color = ['#000', '#000', '#000', '#000'] }: pr
 }
 
 export default Can;
+
+Can.defaultProps = {
+    product: 'cider',
+    color: ['#000', '#000', '#000', '#000'],
+};

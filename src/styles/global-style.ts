@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
     }
     img { max-width:100%; max-height:100%;}
     a {text-decoration:none; color:inherit; }
+    button{border:0;background:transparent;}
 `;
 
 export default GlobalStyle;
