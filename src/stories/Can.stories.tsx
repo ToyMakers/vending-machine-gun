@@ -1,8 +1,6 @@
 import React from 'react';
-import { Story } from '@storybook/react';
-import Can, { propsType } from '../components/common/Can';
-import sodaData, { sodaType } from '../asset/brand';
-import { stringify } from 'querystring';
+import Can from '../components/common/Can';
+import sodaData from '../asset/brand';
 
 export default {
     title: 'Can',
