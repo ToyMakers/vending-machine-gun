@@ -1,12 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const NoNameCan = styled.div<{
+type gradientTypes = {
     basicColor: string;
     gradient1: string;
     gradient2: string;
     gradient3: string;
-}>`
+};
+
+const CanHead = styled.div`
+    width: 50px;
+    height: 3px;
+    margin: 0 auto;
+    border-radius: 50% 50% 0 0;
+    background-color: #666;
+`;
+
+const NoNameCan = styled.div<gradientTypes>`
     position: relative;
     width: 50px;
     height: 80px;
@@ -39,16 +49,18 @@ export interface propsType {
 }
 
 function Can({ product, color }: propsType) {
-    console.log(product, color);
     return (
-        <NoNameCan
-            basicColor={color[0]}
-            gradient1={color[1]}
-            gradient2={color[2]}
-            gradient3={color[3]}
-        >
-            <DrinkLabel>{product}</DrinkLabel>
-        </NoNameCan>
+        <>
+            <CanHead />
+            <NoNameCan
+                basicColor={color[0]}
+                gradient1={color[1]}
+                gradient2={color[2]}
+                gradient3={color[3]}
+            >
+                <DrinkLabel>{product}</DrinkLabel>
+            </NoNameCan>
+        </>
     );
 }
 

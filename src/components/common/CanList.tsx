@@ -41,10 +41,11 @@ const SodaPriceTag = styled.div`
     text-align: center;
 `;
 
-const SodaBuyBtn = styled.button`
+export const SodaBuyBtn = styled.button`
+    display: block;
     width: 50px;
     padding: 5px 0;
-    margin-top: 3px;
+    margin: 3px auto 0;
     border-radius: 5px 5px 50% 50%;
     background-color: #333;
     outline: none;
@@ -55,14 +56,14 @@ const SodaBuyBtn = styled.button`
     }
 `;
 
-const SoldOut = styled.span<{ soldOut: boolean }>`
+export const SoldOut = styled.span<{ soldOut: boolean }>`
     color: ${({ soldOut }) => (soldOut ? '#e03131' : '#555')};
     font-family: 'Righteous', cursive;
     font-size: 0.6rem;
     font-weight: bold;
 `;
 
-const BuyPossible = styled.div<{ possible: boolean }>`
+export const BuyPossible = styled.div<{ possible: boolean }>`
     position: relative;
     width: 35px;
     height: 10px;
@@ -105,7 +106,6 @@ type sodaListType = {
 function CanList({ soda }: sodaListType) {
     const firstLine: Array<sodaType> = sodaData.filter((val) => val.id <= 4);
     const secondLine: Array<sodaType> = sodaData.filter((val) => val.id > 4);
-    console.log(firstLine, secondLine);
     return (
         <SodaList soda={soda}>
             {soda === 1
@@ -132,8 +132,8 @@ function CanList({ soda }: sodaListType) {
                               <SodaPriceBx>
                                   <SodaPriceTag>{price}</SodaPriceTag>
                                   <SodaBuyBtn>
-                                      <BuyPossible possible={false} />
-                                      <SoldOut soldOut={false}>Sold Out</SoldOut>
+                                      <BuyPossible possible={true} />
+                                      <SoldOut soldOut={true}>Sold Out</SoldOut>
                                   </SodaBuyBtn>
                               </SodaPriceBx>
                           </SodaItem>

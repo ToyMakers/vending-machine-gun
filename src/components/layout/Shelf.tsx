@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CanList from '../common/CanList';
 
 const VendingShelf = styled.div`
-    width: 440px;
+    width: 100%;
     margin: 0 auto;
 `;
 
