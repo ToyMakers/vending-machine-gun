@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import { CoinType } from '../../constants/ItemTypes';
+import { useDispatch } from 'react-redux';
+import { coinIncrease } from '../../modules/calc';
 
 const CoinShape = styled.div`
     position: relative;
@@ -24,7 +26,13 @@ const CoinShape = styled.div`
     background-color: gray;
     box-shadow: -1px 1px 3px 2px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    cursor: grab;
     user-select: none;
+
+    &:active {
+        cursor: grabbing;
+    }
+
     &::before,
     &::after {
         content: '';
@@ -52,6 +60,7 @@ type CoinProps = {
 };
 
 function Coin({ amount }: CoinProps) {
+    const dispatch = useDispatch();
     const [{ isDragging }, drag] = useDrag({
         item: { amount, type: CoinType.COIN },
         begin: () => {
@@ -60,7 +69,8 @@ function Coin({ amount }: CoinProps) {
         end: (item: { amount: number } | undefined, monitor: DragSourceMonitor) => {
             const dropResult: unknown = monitor.getDropResult();
             if (item && dropResult) {
-                console.log(item);
+                const { amount } = item;
+                dispatch(coinIncrease(amount));
             }
             console.log(`${amount} drag end`);
         },
