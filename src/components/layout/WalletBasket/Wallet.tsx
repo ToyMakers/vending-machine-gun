@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { WalletBasketTitle } from '../../common/WalletBasketTitle';
 import Coin from '../../common/Coin';
+import { RootState } from '../../../modules';
 
 const WalletWrap = styled.div`
     width: 100%;
@@ -47,6 +49,7 @@ const CoinAmount = styled.p`
 `;
 
 function Wallet() {
+    const remainCoinState = useSelector((state: RootState) => state.calc.walletCoin);
     return (
         <WalletWrap>
             <WalletTitle>WALLET</WalletTitle>
@@ -65,7 +68,7 @@ function Wallet() {
                         <Coin amount={1000} />
                     </CoinItem>
                 </CoinList>
-                <CoinAmount>{12000} Won</CoinAmount>
+                <CoinAmount>{remainCoinState} Won</CoinAmount>
             </CoinWallet>
         </WalletWrap>
     );

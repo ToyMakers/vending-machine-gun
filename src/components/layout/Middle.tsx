@@ -1,7 +1,10 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CoinType } from '../../constants/ItemTypes';
+import { RootState } from '../../modules';
+import { returnCoin } from '../../modules/calc';
 
 const MiddleWrap = styled.div`
     display: flex;
@@ -129,7 +132,9 @@ const CoinIo = styled.div`
     padding-top: 20px;
 `;
 
-const ReturnBx = styled.div``;
+const ReturnBx = styled.div`
+    display: block;
+`;
 const ReturnLabel = styled.span`
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
@@ -192,6 +197,8 @@ const Slot = styled.div`
 `;
 
 function Middle() {
+    const coinAmount = useSelector((state: RootState) => state.calc.machineCoin);
+    const dispatch = useDispatch();
     const [{ isOver }, drop] = useDrop({
         accept: CoinType.COIN,
         drop: () => ({ name: '!' }),
@@ -214,13 +221,13 @@ function Middle() {
                 <DisplayPrice>
                     <PanMaeing>판매중</PanMaeing>
                     <Price>
-                        <span>{2000}</span>원
+                        <span>{coinAmount}</span>원
                     </Price>
                 </DisplayPrice>
                 <CoinIo>
                     <ReturnBx>
                         <ReturnLabel>RETURN</ReturnLabel>
-                        <ReturnBtn />
+                        <ReturnBtn onClick={() => dispatch(returnCoin())} />
                     </ReturnBx>
                     <Slot ref={drop} />
                 </CoinIo>
