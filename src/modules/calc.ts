@@ -4,7 +4,10 @@ const RETURN_COIN = 'calc/RETURN_COIN' as const;
 const BRING_COIN = 'calc/BRING_COIN' as const;
 
 export const coinIncrease = (amount: number) => ({ type: COIN_INCREASE, payload: amount });
-export const perchase = (amount: number) => ({ type: PERCHASE, payload: amount });
+export const perchase = (amount: number, remain: number) => ({
+    type: PERCHASE,
+    payload: { amount, remain },
+});
 export const returnCoin = () => ({ type: RETURN_COIN });
 export const bringCoin = () => ({ type: BRING_COIN });
 
@@ -56,8 +59,8 @@ function calc(state: CoinProps = initialState, action: CoinAction): CoinProps {
             return {
                 ...state,
                 machineCoin:
-                    state.machineCoin >= action.payload
-                        ? state.machineCoin - action.payload
+                    state.machineCoin >= action.payload.amount && action.payload.remain > 0
+                        ? state.machineCoin - action.payload.amount
                         : state.machineCoin,
             };
         default:

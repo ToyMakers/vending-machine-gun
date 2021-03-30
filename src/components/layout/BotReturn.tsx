@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { RootState } from '../../modules';
 import PushBtn from '../common/PushBtn';
 import { bringCoin } from '../../modules/calc';
+import { bringSoda } from '../../modules/picking';
 
 const BotWrap = styled.div`
     display: flex;
@@ -109,7 +110,7 @@ function BotReturn() {
         <BotWrap>
             <ReturnSodaBx>
                 <ReturnIn>
-                    <ReturnSodaBtn>PUSH</ReturnSodaBtn>
+                    <ReturnSodaBtn onClick={() => dispatch(bringSoda())}>PUSH</ReturnSodaBtn>
                 </ReturnIn>
             </ReturnSodaBx>
             <ReturnCoin remain={remain}>

@@ -2,6 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Can from './Can';
 import sodaData, { sodaType } from '../../asset/brand';
+import { useDispatch, useSelector } from 'react-redux';
+import { pick } from '../../modules/picking';
+import { RootState } from '../../modules';
+import { perchase } from '../../modules/calc';
 
 const SodaList = styled.ul<{ soda: number }>`
     display: flex;
@@ -104,36 +108,65 @@ type sodaListType = {
 };
 
 function CanList({ soda }: sodaListType) {
+    const machineCoin: number = useSelector((state: RootState) => state.calc.machineCoin);
+    const picking = useSelector((state: RootState) => state.picking.soda);
+    const dispatch = useDispatch();
     const firstLine: Array<sodaType> = sodaData.filter((val) => val.id <= 4);
     const secondLine: Array<sodaType> = sodaData.filter((val) => val.id > 4);
     return (
         <SodaList soda={soda}>
             {soda === 1
-                ? firstLine.map((val) => {
-                      const { id, product, price, color } = val;
+                ? firstLine.map((val: sodaType) => {
+                      const { id, label, product, price, remaining, color } = val;
+                      const remainArray = Object.values(picking);
+                      const filteredSoda = remainArray.some(
+                          (item: sodaType): boolean => item.label === label
+                      );
                       return (
                           <SodaItem key={id}>
                               <Can product={product} color={color} />
                               <SodaPriceBx>
                                   <SodaPriceTag>{price}</SodaPriceTag>
-                                  <SodaBuyBtn>
-                                      <BuyPossible possible={false} />
-                                      <SoldOut soldOut={false}>Sold Out</SoldOut>
+                                  <SodaBuyBtn
+                                      onClick={() => {
+                                          dispatch(pick(id, machineCoin));
+                                          dispatch(perchase(price, remaining));
+                                      }}
+                                  >
+                                      <BuyPossible possible={machineCoin >= price ? true : false} />
+                                      <SoldOut
+                                          soldOut={filteredSoda && remaining > 0 ? false : true}
+                                      >
+                                          Sold Out
+                                      </SoldOut>
                                   </SodaBuyBtn>
                               </SodaPriceBx>
                           </SodaItem>
                       );
                   })
-                : secondLine.map((val) => {
-                      const { id, product, price, color } = val;
+                : secondLine.map((val: sodaType) => {
+                      const { id, label, product, price, remaining, color } = val;
+                      const remainArray = Object.values(picking);
+                      const filteredSoda = remainArray.some(
+                          (item: sodaType): boolean => item.label === label
+                      );
                       return (
                           <SodaItem key={id}>
                               <Can product={product} color={color} />
                               <SodaPriceBx>
                                   <SodaPriceTag>{price}</SodaPriceTag>
-                                  <SodaBuyBtn>
-                                      <BuyPossible possible={true} />
-                                      <SoldOut soldOut={true}>Sold Out</SoldOut>
+                                  <SodaBuyBtn
+                                      onClick={() => {
+                                          dispatch(pick(id, machineCoin));
+                                          dispatch(perchase(price, remaining));
+                                      }}
+                                  >
+                                      <BuyPossible possible={machineCoin >= price ? true : false} />
+                                      <SoldOut
+                                          soldOut={filteredSoda && remaining > 0 ? false : true}
+                                      >
+                                          Sold Out
+                                      </SoldOut>
                                   </SodaBuyBtn>
                               </SodaPriceBx>
                           </SodaItem>

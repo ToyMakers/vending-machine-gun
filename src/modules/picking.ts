@@ -2,6 +2,7 @@
 import sodaData, { sodaType } from '../asset/brand';
 
 const PICK = 'picking/PICK' as const;
+const BRING_SODA = 'picking/BRING_SODA' as const;
 
 export const pick = (number: number, money: number) => ({
     type: PICK,
@@ -11,9 +12,11 @@ export const pick = (number: number, money: number) => ({
     },
 });
 
-type sodaAction = ReturnType<typeof pick>;
+export const bringSoda = () => ({ type: BRING_SODA });
 
-interface soda {
+type sodaAction = ReturnType<typeof pick> | ReturnType<typeof bringSoda>;
+
+type soda = {
     demisoda: sodaType;
     sprite: sodaType;
     bongbong: sodaType;
@@ -22,34 +25,58 @@ interface soda {
     mountaindew: sodaType;
     confidence: sodaType;
     powerade: sodaType;
-}
-
-const initialState: soda = {
-    demisoda: sodaData[0],
-    sprite: sodaData[1],
-    bongbong: sodaData[2],
-    milkis: sodaData[3],
-    twopercent: sodaData[4],
-    mountaindew: sodaData[5],
-    confidence: sodaData[6],
-    powerade: sodaData[7],
 };
 
-function picking(state: soda = initialState, action: sodaAction): soda {
+type sodaState = {
+    soda: soda;
+    middleStage: sodaType[];
+    basket: sodaType[];
+};
+
+const initialState: sodaState = {
+    soda: {
+        demisoda: sodaData[0],
+        sprite: sodaData[1],
+        bongbong: sodaData[2],
+        milkis: sodaData[3],
+        twopercent: sodaData[4],
+        mountaindew: sodaData[5],
+        confidence: sodaData[6],
+        powerade: sodaData[7],
+    },
+    middleStage: [],
+    basket: [],
+};
+
+function picking(state: sodaState = initialState, action: sodaAction): sodaState {
     switch (action.type) {
         case PICK:
             const filteringSoda = sodaData.filter(
-                (item) => item.id === action.payload.selectNumber + 1
+                (item) => item.id === action.payload.selectNumber
             );
             const selectSoda = filteringSoda[0];
             const { label, remaining, price } = selectSoda;
             const { money } = action.payload;
             return {
                 ...state,
-                [label]: {
-                    ...selectSoda,
-                    remaining: remaining > 0 && money > price ? --selectSoda.remaining : remaining,
+                soda: {
+                    ...state.soda,
+                    [label]: {
+                        ...selectSoda,
+                        remaining:
+                            remaining > 0 && money > price ? --selectSoda.remaining : remaining,
+                    },
                 },
+                middleStage:
+                    remaining > 0 && money > price
+                        ? state.middleStage.concat(selectSoda)
+                        : state.middleStage,
+            };
+        case BRING_SODA:
+            return {
+                ...state,
+                middleStage: [],
+                basket: state.basket.concat(state.middleStage), //concat
             };
         default:
             return state;
