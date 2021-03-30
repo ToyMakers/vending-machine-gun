@@ -5,6 +5,8 @@ import { RootState } from '../../modules';
 import PushBtn from '../common/PushBtn';
 import { bringCoin } from '../../modules/calc';
 import { bringSoda } from '../../modules/picking';
+import Can from '../common/Can';
+import { sodaType } from '../../asset/brand';
 
 const BotWrap = styled.div`
     display: flex;
@@ -20,6 +22,7 @@ const ReturnSodaBx = styled.div`
 `;
 
 const ReturnIn = styled.div`
+    position: relative;
     width: 85%;
     height: 80px;
     margin: 10px auto 0;
@@ -30,7 +33,41 @@ const ReturnIn = styled.div`
 `;
 
 const ReturnSodaBtn = styled(PushBtn)`
+    position: relative;
+    z-index: 1;
     border-radius: 0 0 20px 20px;
+`;
+
+const SodaCan = styled.div<{ location: number }>`
+    position: absolute;
+    top: 20px;
+    left: ${({ location }) => `${location}px`};
+    transform: rotate(90deg);
+    animation-name: drop;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+
+    @keyframes drop {
+        0% {
+            top: -100px;
+            transform: rotate(-260deg);
+        }
+        40% {
+            top: 20px;
+            transform: rotate(90deg);
+        }
+
+        60% {
+            top: 10px;
+            transform: rotate(60deg);
+            transform-origin: center;
+        }
+
+        100% {
+            top: 20px;
+            transform: rotate(90deg);
+        }
+    }
 `;
 
 const ReturnCoin = styled.div<remainProps>`
@@ -105,12 +142,24 @@ type remainProps = {
 
 function BotReturn() {
     const remain = useSelector((state: RootState) => state.calc.remainStatus);
+    const middle = useSelector((state: RootState) => state.picking.middleStage);
     const dispatch = useDispatch();
     return (
         <BotWrap>
             <ReturnSodaBx>
                 <ReturnIn>
                     <ReturnSodaBtn onClick={() => dispatch(bringSoda())}>PUSH</ReturnSodaBtn>
+                    {
+                        /* <SodaCan> */
+                        middle.map((soda: sodaType, idx) => {
+                            const { product, color, location } = soda;
+                            return (
+                                <SodaCan key={idx} location={location}>
+                                    <Can product={product} color={color} />
+                                </SodaCan>
+                            );
+                        })
+                    }
                 </ReturnIn>
             </ReturnSodaBx>
             <ReturnCoin remain={remain}>

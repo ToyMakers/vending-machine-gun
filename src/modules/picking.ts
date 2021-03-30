@@ -55,8 +55,10 @@ function picking(state: sodaState = initialState, action: sodaAction): sodaState
                 (item) => item.id === action.payload.selectNumber
             );
             const selectSoda = filteringSoda[0];
+            const pos = Math.floor(Math.random() * 200); //랜덤위치 지정
             const { label, remaining, price } = selectSoda;
             const { money } = action.payload;
+
             return {
                 ...state,
                 soda: {
@@ -69,14 +71,17 @@ function picking(state: sodaState = initialState, action: sodaAction): sodaState
                 },
                 middleStage:
                     remaining > 0 && money > price
-                        ? state.middleStage.concat(selectSoda)
+                        ? state.middleStage.concat({
+                              ...selectSoda,
+                              location: pos,
+                          })
                         : state.middleStage,
             };
         case BRING_SODA:
             return {
                 ...state,
                 middleStage: [],
-                basket: state.basket.concat(state.middleStage), //concat
+                basket: state.basket.concat(state.middleStage),
             };
         default:
             return state;

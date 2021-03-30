@@ -5,6 +5,7 @@ export interface sodaType {
     price: number;
     remaining: number;
     color: string[];
+    location: number;
 }
 
 const sodaData: Array<sodaType> = [
@@ -15,6 +16,7 @@ const sodaData: Array<sodaType> = [
         price: 500,
         remaining: 3,
         color: ['#92c12e', '#175318', '#50933c', '#1f7a14'],
+        location: 0,
     },
     {
         id: 2,
@@ -23,6 +25,7 @@ const sodaData: Array<sodaType> = [
         price: 700,
         remaining: 4,
         color: ['#28b47d', '#156142', '#28b474', '#15613e'],
+        location: 0,
     },
     {
         id: 3,
@@ -31,6 +34,7 @@ const sodaData: Array<sodaType> = [
         price: 650,
         remaining: 2,
         color: ['#f4ffab', '#615c15', '#b4a328', '#646615'],
+        location: 0,
     },
     {
         id: 4,
@@ -39,6 +43,7 @@ const sodaData: Array<sodaType> = [
         price: 700,
         remaining: 3,
         color: ['#2883b4', '#1a5b7c', '#288db4', '#155661'],
+        location: 0,
     },
     {
         id: 5,
@@ -47,6 +52,7 @@ const sodaData: Array<sodaType> = [
         price: 500,
         remaining: 2,
         color: ['#f668a6', '#852a60', '#f868b1', '#a32665'],
+        location: 0,
     },
     {
         id: 6,
@@ -55,6 +61,7 @@ const sodaData: Array<sodaType> = [
         price: 800,
         remaining: 4,
         color: ['#be5fe1', '#490b5b', '#8435a5', '#4a115b'],
+        location: 0,
     },
     {
         id: 7,
@@ -63,6 +70,7 @@ const sodaData: Array<sodaType> = [
         price: 1200,
         remaining: 3,
         color: ['#e1985f', '#783b0d', '#f46815', '#a13c0b'],
+        location: 0,
     },
     {
         id: 8,
@@ -71,6 +79,7 @@ const sodaData: Array<sodaType> = [
         price: 900,
         remaining: 4,
         color: ['#765fe1', '#0d2378', '#154ff4', '#0f2c82'],
+        location: 0,
     },
 ];
 

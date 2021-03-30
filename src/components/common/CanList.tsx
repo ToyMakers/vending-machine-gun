@@ -54,6 +54,7 @@ export const SodaBuyBtn = styled.button`
     background-color: #333;
     outline: none;
     cursor: pointer;
+    user-select: none;
 
     &:active {
         transform: scale(0.95);

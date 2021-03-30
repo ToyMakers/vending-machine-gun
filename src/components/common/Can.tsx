@@ -50,7 +50,7 @@ export interface propsType {
 
 function Can({ product, color }: propsType) {
     return (
-        <>
+        <div>
             <CanHead />
             <NoNameCan
                 basicColor={color[0]}
@@ -60,7 +60,7 @@ function Can({ product, color }: propsType) {
             >
                 <DrinkLabel>{product}</DrinkLabel>
             </NoNameCan>
-        </>
+        </div>
     );
 }
 
