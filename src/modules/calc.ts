@@ -40,13 +40,15 @@ function calc(state: CoinProps = initialState, action: CoinAction): CoinProps {
                 ...state,
                 machineCoin: state.machineCoin + action.payload,
                 walletCoin: state.walletCoin - action.payload,
+                remainStatus: false,
             };
         case RETURN_COIN:
             return {
                 ...state,
                 machineCoin: 0,
                 remainCoin: state.remainCoin + state.machineCoin,
-                remainStatus: true,
+                // remainStatus: true,
+                remainStatus: state.machineCoin > 0 ? true : false,
             };
         case BRING_COIN:
             return {
