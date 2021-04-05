@@ -7,8 +7,9 @@ import { createStore } from 'redux';
 import rootReducer from './modules';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
     <DndProvider backend={HTML5Backend}>
