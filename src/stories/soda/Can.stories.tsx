@@ -1,9 +1,9 @@
 import React from 'react';
-import Can from '../components/common/Can';
-import sodaData from '../asset/brand';
+import Can from '../../components/common/Can';
+import sodaData from '../../asset/brand';
 
 export default {
-    title: 'Can',
+    title: 'Top/Can',
     component: Can,
     argTypes: {
         sodaColor: {

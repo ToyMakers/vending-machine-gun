@@ -1,8 +1,8 @@
 import React from 'react';
-import DisplayPrice from '../components/layout/Middle';
+import DisplayPrice from '../../components/layout/Middle';
 
 export default {
-    title: 'Price',
+    title: 'Middle/Price',
     component: DisplayPrice,
     argTypes: {
         price: {

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDrop } from 'react-dnd';
 import styled from 'styled-components';
 import { CoinType } from '../../constants/ItemTypes';
+import { DisplayPriceWrap } from '../common/Middle/MiddleComponent';
 
 const MiddleWrap = styled.div`
     display: flex;
@@ -92,35 +93,35 @@ const InsertBx = styled.div`
     width: 50%;
 `;
 
-export const DisplayPrice = styled.div`
-    width: 50%;
-    height: 50px;
-    padding: 5px 10px;
-    box-shadow: inset 0 0 10px 3px rgba(255, 255, 255, 0.2), -1px 1px 5px 2px rgba(24, 24, 24, 0.5);
-    background-color: #222;
-`;
+// export const DisplayPrice = styled.div`
+//     width: 50%;
+//     height: 50px;
+//     padding: 5px 10px;
+//     box-shadow: inset 0 0 10px 3px rgba(255, 255, 255, 0.2), -1px 1px 5px 2px rgba(24, 24, 24, 0.5);
+//     background-color: #222;
+// `;
 
-const PanMaeing = styled.span`
-    text-align: left;
-    text-shadow: 0 0 5px #d67a60;
-    font-size: 0.7rem;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 500;
-    color: #f77757;
-`;
+// const PanMaeing = styled.span`
+//     text-align: left;
+//     text-shadow: 0 0 5px #d67a60;
+//     font-size: 0.7rem;
+//     font-family: 'Noto Sans KR', sans-serif;
+//     font-weight: 500;
+//     color: #f77757;
+// `;
 
-const Price = styled.strong`
-    display: block;
-    text-align: right;
-    text-shadow: 0 0 3px #d67a60;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.95rem;
-    color: #f77757;
-    & span {
-        font-family: 'Righteous', cursive;
-        font-size: 1rem;
-    }
-`;
+// const Price = styled.strong`
+//     display: block;
+//     text-align: right;
+//     text-shadow: 0 0 3px #d67a60;
+//     font-family: 'Noto Sans KR', sans-serif;
+//     font-size: 0.95rem;
+//     color: #f77757;
+//     & span {
+//         font-family: 'Righteous', cursive;
+//         font-size: 1rem;
+//     }
+// `;
 
 const CoinIo = styled.div`
     display: flex;
@@ -211,12 +212,7 @@ function Middle() {
                 </BigIcon>
             </BigIconBx>
             <InsertBx>
-                <DisplayPrice>
-                    <PanMaeing>판매중</PanMaeing>
-                    <Price>
-                        <span>{2000}</span>원
-                    </Price>
-                </DisplayPrice>
+                <DisplayPriceWrap />
                 <CoinIo>
                     <ReturnBx>
                         <ReturnLabel>RETURN</ReturnLabel>
