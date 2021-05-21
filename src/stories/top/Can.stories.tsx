@@ -1,18 +1,18 @@
 import React from 'react';
-import Can from '../components/common/Can';
-import sodaData from '../asset/brand';
+import Can from '../../components/common/Can';
+import sodaData from '../../asset/brand';
 
 export default {
-    title: 'Can',
+    title: 'Top/Can',
     component: Can,
     argTypes: {
-        sodaColor: {
+        color: {
             control: {
                 type: 'select',
                 options: [...sodaData.map((val) => val.color)],
             },
         },
-        sodaName: {
+        product: {
             control: {
                 type: 'text',
             },
@@ -20,6 +20,4 @@ export default {
     },
 };
 
-export const CanTemplate = ({ sodaColor, sodaName }: never) => (
-    <Can color={sodaColor} product={sodaName} />
-);
+export const CanTemplate = ({ color, product }: never) => <Can color={color} product={product} />;

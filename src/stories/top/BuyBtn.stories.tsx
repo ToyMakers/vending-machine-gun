@@ -1,8 +1,8 @@
 import React from 'react';
-import { SodaBuyBtn, SoldOut, BuyPossible } from '../components/common/CanList';
+import { SodaBuyBtn, SoldOut, BuyPossible } from '../../components/common/CanList';
 
 export default {
-    title: 'BuyBtn',
+    title: 'Top/BuyBtn',
     component: [SodaBuyBtn, SoldOut, BuyPossible],
     argTypes: {
         possible: {
